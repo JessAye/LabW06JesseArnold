@@ -11,5 +11,9 @@ namespace LabW06JesseArnold.Services
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
     }
 }

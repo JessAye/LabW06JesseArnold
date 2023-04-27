@@ -4,9 +4,9 @@ namespace LabW06JesseArnold.Services
 {
     public interface IUserRepository
     {
-        Task<ApplicationUser?> ReadAsync(string username);
+        Task<ApplicationUser?> ReadAsyncByUserName(string username);
 
-        Task<ApplicationUser> CreateAsync(ApplicationUser user, string password);
+       
 
      
     }
