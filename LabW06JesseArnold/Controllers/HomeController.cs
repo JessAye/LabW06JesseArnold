@@ -30,5 +30,6 @@ namespace LabW06JesseArnold.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
