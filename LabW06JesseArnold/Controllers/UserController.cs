@@ -9,11 +9,13 @@ namespace LabW06JesseArnold.Controllers
     {
        
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private readonly IRoleRepository _roleRepository;
+        public UserController(IUserRepository userRepository, IRoleRepository roleRepository)
         {
             _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var users = await _userRepository.ReadAllAsync();
@@ -27,6 +29,22 @@ namespace LabW06JesseArnold.Controllers
                });
             return View(userList);
         }
+        public async Task<IActionResult> AssignRole([Bind(Prefix = "Id")] string username)
+        {
+            var user = await _userRepository.ReadAsyncByUserName(username);
+            if (user == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var allRoles = _roleRepository.ReadAll().ToList();
+            var allRoleNames = allRoles.Select(r => r.Name);
+            var rolesUserDoNotHave = allRoleNames.Except(user.Roles);
+            ViewData["User"] = user;
+            return View(rolesUserDoNotHave);
+        }
+        
+
+
 
     }
 }

@@ -43,7 +43,8 @@
                 @Html.DisplayFor(modelItem => item.RoleNames)
             </td>
             <td>
-               
+                    <a asp-action="assignrole" asp-controller="User"
+                   asp-route-id="@item.UserName" >Assign Role</a>
             </td>
         </tr>
 }

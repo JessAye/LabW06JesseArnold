@@ -25,6 +25,8 @@ namespace LabW06JesseArnold.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
         public IActionResult About()
         {
             return View();
