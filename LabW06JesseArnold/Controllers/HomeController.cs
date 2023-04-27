@@ -1,5 +1,6 @@
 ﻿using LabW06JesseArnold.Models;
 using LabW06JesseArnold.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -14,13 +15,17 @@ namespace LabW06JesseArnold.Controllers
             _logger = logger;
             _userRepo = userRepo;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult About()
         {
             return View();
         }
