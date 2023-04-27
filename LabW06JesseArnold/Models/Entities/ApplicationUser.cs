@@ -12,6 +12,6 @@ namespace LabW06JesseArnold.Models.Entities
         [StringLength(50)]
         public string LastName { get; set; }
 
-        public UserManager<ApplicationUser> UserManager { get; set; }   
+         
     }
 }
