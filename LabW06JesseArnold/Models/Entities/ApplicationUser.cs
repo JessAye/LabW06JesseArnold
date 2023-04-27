@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace LabW06JesseArnold.Models.Entities
 {
     public class ApplicationUser : IdentityUser
@@ -12,6 +14,13 @@ namespace LabW06JesseArnold.Models.Entities
         [StringLength(50)]
         public string LastName { get; set; }
 
-         
+        [NotMapped]
+        public ICollection<string> Roles { get; set; } = new List<string>();
+
+        // roleName = "Admin"
+        public bool HasRole(string roleName)
+        {
+            return Roles.Any(r => r == roleName);
+        }
     }
 }

@@ -8,6 +8,6 @@ namespace LabW06JesseArnold.Services
 
         Task<ApplicationUser> CreateAsync(ApplicationUser user, string password);
 
-        Task AssignUserRoleAsync(string userName, string roleName);
+     
     }
 }
