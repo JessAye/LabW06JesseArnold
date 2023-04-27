@@ -17,7 +17,7 @@ namespace LabW06JesseArnold.Models.Entities
         [NotMapped]
         public ICollection<string> Roles { get; set; } = new List<string>();
 
-        // roleName = "Admin"
+       
         public bool HasRole(string roleName)
         {
             return Roles.Any(r => r == roleName);

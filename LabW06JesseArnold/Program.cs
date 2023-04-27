@@ -17,7 +17,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-
+builder.Services.AddScoped<IUserRepository, DbUserRepository>();
 builder.Services.AddScoped<Initializer>();
 var app = builder.Build();
 await SeedDataAsync(app);
