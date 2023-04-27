@@ -11,16 +11,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+//CHECK--------------------------------------------------------------------------------------------------------
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddUserManager<UserManager<ApplicationUser>>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddScoped<IUserRepository, DbUserRepository>();
 builder.Services.AddScoped<Initializer>();
+
 var app = builder.Build();
+
 await SeedDataAsync(app);
+
 static async Task SeedDataAsync(WebApplication app)
 {
     using var scope = app.Services.CreateScope();
@@ -37,6 +40,7 @@ static async Task SeedDataAsync(WebApplication app)
             $"An error occurred while seeding the database. {ex.Message}");
     }
 }
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

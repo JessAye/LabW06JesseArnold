@@ -9,7 +9,7 @@ namespace LabW06JesseArnold.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUserRepository _userRepo;
-        public HomeController(DbUserRepository userRepo, ILogger<HomeController> logger)
+        public HomeController(IUserRepository userRepo, ILogger<HomeController> logger)
         {
             _logger = logger;
             _userRepo = userRepo;

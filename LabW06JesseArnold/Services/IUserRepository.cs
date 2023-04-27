@@ -6,8 +6,9 @@ namespace LabW06JesseArnold.Services
     {
         Task<ApplicationUser?> ReadAsyncByUserName(string username);
 
-       
+        Task<IQueryable<ApplicationUser>> ReadAllAsync();
 
-     
+
+
     }
 }
