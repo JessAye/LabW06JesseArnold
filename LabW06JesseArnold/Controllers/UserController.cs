@@ -42,7 +42,29 @@ namespace LabW06JesseArnold.Controllers
             ViewData["User"] = user;
             return View(rolesUserDoNotHave);
         }
-        
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AssignRole(string username, string roleName)
+        {
+            var user = await _userRepository.ReadAsyncByUserName(username);
+            if (user == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var role = await _roleRepository.ReadRoleAsync(roleName);
+            if (role == null)
+            {
+                ModelState.AddModelError("", $"The role '{roleName}' does not exist.");
+                var allRoles = _roleRepository.ReadAll().ToList();
+                var allRoleNames = allRoles.Select(r => r.Name);
+                var rolesUserDoNotHave = allRoleNames.Except(user.Roles);
+                ViewData["User"] = user;
+                return View(rolesUserDoNotHave);
+            }
+            await _userRepository.AssignRoleAsync(user, role);
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

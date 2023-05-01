@@ -8,7 +8,7 @@ namespace LabW06JesseArnold.Services
 
         Task<IQueryable<ApplicationUser>> ReadAllAsync();
 
-        Task<bool>AssignRoleAsync(string userName, string roleName);
+        Task<bool>AssignRoleAsync(ApplicationUser user, ApplicationUser role);
 
 
 

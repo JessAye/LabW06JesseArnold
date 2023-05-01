@@ -9,10 +9,11 @@ namespace LabW06JesseArnold.Services
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public DbUserRepository(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
+        public DbUserRepository(ApplicationDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _db = db;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<ApplicationUser?> ReadAsyncByUserName(string username)
@@ -47,6 +48,7 @@ namespace LabW06JesseArnold.Services
             {
                 await _userManager.AddToRoleAsync(user, roleName);
             }
+            
             return true;
         }
 
