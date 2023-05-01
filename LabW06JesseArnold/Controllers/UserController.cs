@@ -44,24 +44,15 @@ namespace LabW06JesseArnold.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AssignRole(string username, string roleName)
+        public async Task<IActionResult> AssignRole(string userName, string roleName)
         {
-            var user = await _userRepository.ReadAsyncByUserName(username);
+            var user = await _userRepository.ReadAsyncByUserName(userName);
             if (user == null)
             {
                 return RedirectToAction("Index");
             }
-            var role = await _roleRepository.ReadRoleAsync(roleName);
-            if (role == null)
-            {
-                ModelState.AddModelError("", $"The role '{roleName}' does not exist.");
-                var allRoles = _roleRepository.ReadAll().ToList();
-                var allRoleNames = allRoles.Select(r => r.Name);
-                var rolesUserDoNotHave = allRoleNames.Except(user.Roles);
-                ViewData["User"] = user;
-                return View(rolesUserDoNotHave);
-            }
-            await _userRepository.AssignRoleAsync(user, role);
+            
+            await _userRepository.AssignRoleAsync(userName, roleName);
             return RedirectToAction("Index");
         }
 
